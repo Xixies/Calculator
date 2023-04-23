@@ -3,4 +3,13 @@
     <string name="hint_input_1">1st input number</string>
     <string name="hint_input_2">2nd input number</string>
     <string name="button_calculate">Calculate</string>
+    <string name="default_output">No Output</string>
+    <string name="default_operator">No Operator</string>
+    <string name="operator_add">+</string>
+    <string name="operator_minus">-</string>
+    <string name="operator_multiply">x</string>
+    <string name="operator_divide">%</string>
+    <string name="operator_equal">=</string>
+
+
 </resources>
