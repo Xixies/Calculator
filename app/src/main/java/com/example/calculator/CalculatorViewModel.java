@@ -1,11 +1,14 @@
 package com.example.calculator;
 
+import static android.provider.Settings.System.getString;
+
 import androidx.lifecycle.ViewModel;
 
 public class CalculatorViewModel extends ViewModel {
     private int num1;
     private int num2;
     private String result;
+    private String operator;
     private String default_output = "Empty output";
 
     public void setNum1(int input1) {
@@ -16,6 +19,10 @@ public class CalculatorViewModel extends ViewModel {
         num2 = input2;
     }
 
+    public void setOperator(String opera) {
+        operator = opera;
+    }
+
     public int getNum1() {
         return num1;
     }
@@ -24,9 +31,16 @@ public class CalculatorViewModel extends ViewModel {
         return num2;
     }
 
-    public String getResult() {
+    public String getOperator(String default_operator) {
+        if (operator == null){
+            return default_operator;
+        }
+        return operator;
+    }
+
+    public String getResult(String default_result) {
         if (result == null){
-            return default_output;
+            return default_result;
         }
         return result;
     }
