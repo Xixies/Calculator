@@ -1,6 +1,7 @@
 package com.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -34,25 +35,19 @@ public class MainActivity extends AppCompatActivity {
         EditText et2 = binding.edittextInput2;
         Button bt_cal = binding.buttonCalculate;
 
-        // local variable
+        // local variable stored in ViewModel
+        CalculatorViewModel viewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
 
         bt_cal.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                int input1 = Integer.parseInt(String.valueOf(et1.getText()));
-                int input2 = Integer.parseInt(String.valueOf(et2.getText()));
-                tv.setText(addFromJNI(input1, input2));
+                viewModel.setNum1(Integer.parseInt(String.valueOf(et1.getText())));
+                viewModel.setNum2(Integer.parseInt(String.valueOf(et2.getText())));
+                viewModel.doCalculation();
+                String res = viewModel.getResult();
+                tv.setText(res);
             }
         });
 
-
-
-        tv.setText(stringFromJNI());
+        tv.setText(viewModel.getResult());
     }
-
-    /**
-     * A native method that is implemented by the 'calculator' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-    public native String addFromJNI(int a, int b);
 }

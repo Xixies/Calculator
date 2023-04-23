@@ -2,15 +2,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_calculator_MainActivity_stringFromJNI(
-        JNIEnv* env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
-}
-
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_calculator_MainActivity_addFromJNI(
+Java_com_example_calculator_CalculatorViewModel_addFromJNI(
         JNIEnv* env,
         jobject,
         jint a,
