@@ -51,8 +51,14 @@ public class MainActivity extends AppCompatActivity {
         CalculatorViewModel viewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
         bt_cal.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                viewModel.setNum1(Integer.parseInt(String.valueOf(et_num1.getText())));
-                viewModel.setNum2(Integer.parseInt(String.valueOf(et_num2.getText())));
+                String num_s1 = String.valueOf(et_num1.getText());
+                String num_s2 = String.valueOf(et_num2.getText());
+                if (num_s1.isEmpty() || num_s2.isEmpty()){ // empty input
+                    tv_output.setText(getString(R.string.default_output));
+                    return;
+                }
+                viewModel.setNum1(Integer.parseInt(num_s1));
+                viewModel.setNum2(Integer.parseInt(num_s2));
                 viewModel.doCalculation();
                 tv_output.setText(viewModel.getResult(getString(R.string.default_output)));
             }
