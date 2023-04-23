@@ -8,8 +8,8 @@ public class CalculatorViewModel extends ViewModel {
     private int num1;
     private int num2;
     private String result;
-    private String operator;
-    private String default_output = "Empty output";
+    public enum Operator {NULL, ADD, MINUS, MULTIPLY, DIVIDE};
+    private Operator operator;
 
     public void setNum1(int input1) {
         num1 = input1;
@@ -19,7 +19,7 @@ public class CalculatorViewModel extends ViewModel {
         num2 = input2;
     }
 
-    public void setOperator(String opera) {
+    public void setOperator(Operator opera) {
         operator = opera;
     }
 
@@ -31,10 +31,7 @@ public class CalculatorViewModel extends ViewModel {
         return num2;
     }
 
-    public String getOperator(String default_operator) {
-        if (operator == null){
-            return default_operator;
-        }
+    public Operator getOperator() {
         return operator;
     }
 
@@ -45,14 +42,27 @@ public class CalculatorViewModel extends ViewModel {
         return result;
     }
 
-    public CalculatorViewModel() {
-        // trigger user load.
-    }
-
+    /**
+     * Processing Arithmetic calculations by calling native library.
+     */
     void doCalculation() {
-        // depending on the action, do necessary business logic calls and update the
-        // userLiveData.
-        result = addFromJNI(num1, num2);
+        switch (operator){
+            case ADD:
+                result = addFromJNI(num1, num2);
+                break;
+            case MINUS:
+                result = minusFromJNI(num1, num2);
+                break;
+            case MULTIPLY:
+                result = multiplyFromJNI(num1, num2);
+                break;
+            case DIVIDE:
+                result = divideFromJNI(num1, num2);
+                break;
+            case NULL:
+                result = null;
+                break;
+        }
     }
 
     /**
@@ -60,5 +70,8 @@ public class CalculatorViewModel extends ViewModel {
      * which is packaged with this application.
      */
     public native String addFromJNI(int a, int b);
+    public native String minusFromJNI(int a, int b);
+    public native String multiplyFromJNI(int a, int b);
+    public native String divideFromJNI(int a, int b);
 }
 

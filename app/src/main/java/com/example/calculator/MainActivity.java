@@ -61,33 +61,45 @@ public class MainActivity extends AppCompatActivity {
         bt_add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 tv_operator.setText(getString(R.string.operator_add));
-                viewModel.setOperator(getString(R.string.operator_add));
+                viewModel.setOperator(CalculatorViewModel.Operator.ADD);
             }
         });
 
         bt_minus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 tv_operator.setText(getString(R.string.operator_minus));
-                viewModel.setOperator(getString(R.string.operator_minus));
+                viewModel.setOperator(CalculatorViewModel.Operator.MINUS);
             }
         });
 
         bt_multiply.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 tv_operator.setText(getString(R.string.operator_multiply));
-                viewModel.setOperator(getString(R.string.operator_multiply));
+                viewModel.setOperator(CalculatorViewModel.Operator.MULTIPLY);
             }
         });
 
         bt_divide.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 tv_operator.setText(getString(R.string.operator_divide));
-                viewModel.setOperator(getString(R.string.operator_divide));
+                viewModel.setOperator(CalculatorViewModel.Operator.DIVIDE);
             }
         });
 
         // reset data when activity recreate
         tv_output.setText(viewModel.getResult(getString(R.string.default_output)));
-        tv_operator.setText(viewModel.getOperator(getString(R.string.default_operator)));
+        CalculatorViewModel.Operator operator = viewModel.getOperator();
+        if (operator == CalculatorViewModel.Operator.ADD) {
+            tv_operator.setText(getString(R.string.operator_add));
+        } else if(operator == CalculatorViewModel.Operator.MINUS) {
+            tv_operator.setText(getString(R.string.operator_minus));
+        } else if(operator == CalculatorViewModel.Operator.MULTIPLY) {
+            tv_operator.setText(getString(R.string.operator_multiply));
+        } else if(operator == CalculatorViewModel.Operator.DIVIDE){
+            tv_operator.setText(getString(R.string.operator_divide));
+        } else{
+            tv_operator.setText(getString(R.string.default_operator));
+        }
+
     }
 }
